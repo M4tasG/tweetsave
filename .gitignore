@@ -4,6 +4,8 @@ config.json
 #.txt files
 *.txt
 
+#tweet folders
+tweet-*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
