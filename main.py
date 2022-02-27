@@ -22,10 +22,8 @@ api = Api(config["BEARER_TOKEN"])
 print(f'😎 TWEET SAVE 😎 SCRAPING INITIATED')
 for line in list:
     url = line[0:-1]
-    #url = "https://twitter.com/Tsihanouskaya/status/1497898169614708741"
     tweet_id = parse_url(url)
 
-    #curl --request GET 'https://api.twitter.com/1.1/statuses/show.json?id=1497602699373645825&tweet_mode=extended' --header 'Authorization: Bearer AAAAAAAAAAAAAAAAAAAAACyvZgEAAAAAt0QaI6wQH9leUss6D1REBSn6FLc%3DaLMnJWehLL9YPuj7ZtKNXANT1ivLKCwxEDxbdYlL0h7rTLWGUD'
     try:
         response = api.get_tweet(tweet_id, expansions=['attachments.media_keys', 'author_id'], media_fields=['media_key'], user_fields=['id'])
     except:
