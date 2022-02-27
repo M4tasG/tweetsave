@@ -19,16 +19,18 @@ with open(filename, 'r') as f:
     list = f.readlines()
 
 api = Api(config["BEARER_TOKEN"])
+print(f'😎 TWEET SAVE 😎 SCRAPING INITIATED')
 for line in list:
     url = line[0:-1]
     #url = "https://twitter.com/Tsihanouskaya/status/1497898169614708741"
     tweet_id = parse_url(url)
 
     #curl --request GET 'https://api.twitter.com/1.1/statuses/show.json?id=1497602699373645825&tweet_mode=extended' --header 'Authorization: Bearer AAAAAAAAAAAAAAAAAAAAACyvZgEAAAAAt0QaI6wQH9leUss6D1REBSn6FLc%3DaLMnJWehLL9YPuj7ZtKNXANT1ivLKCwxEDxbdYlL0h7rTLWGUD'
-
-    response = api.get_tweet(tweet_id, expansions=['attachments.media_keys', 'author_id'], media_fields=['media_key'], user_fields=['id'])
-
-    print(response)
+    try:
+        response = api.get_tweet(tweet_id, expansions=['attachments.media_keys', 'author_id'], media_fields=['media_key'], user_fields=['id'])
+    except:
+        pass
+    print(f'😎 TWEET SAVE 😎 SCRAPING TWEET: {tweet_id}')
 
     v_count = 0
     p_count = 0
@@ -63,6 +65,7 @@ for line in list:
     with open(f'tweet-{tweet_id}/{tweet_id}.json', 'w') as f:
         json.dump({'tweet_id': tweet_id, "tweet_text": response.data.text, "author_id": response.includes.users[0].id, "author_name": response.includes.users[0].name, "author_handle": f'@{response.includes.users[0].username}'}, f, indent=4)
 
+    print(f'😎 TWEET SAVE 😎 {tweet_id} SCRAPED')
 #/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/section/div/div/div[1]/div/div/article/div/div/div/div[3]/div[2]/div/div/div/div/div/a/div/div[2]/div/img
 #yld_opts = {'outtmpl': 'a/b.mp4'}
 #with YoutubeDL(yld_opts) as ydl:
