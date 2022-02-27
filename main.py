@@ -1,5 +1,4 @@
 import json
-from nturl2path import url2pathname
 import requests
 from os.path import basename
 from os import mkdir
