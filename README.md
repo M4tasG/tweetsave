@@ -3,7 +3,7 @@ a very simple tweet saver
 
 ### Usage
 The saver takes tweet links from a file
-`py main.py <filename>`
+```py main.py <filename>```
 File example (list.txt):
 ```
 https://twitter.com/olex_scherba/status/1496918800335523840
