@@ -34,7 +34,10 @@ for line in list:
 
     v_count = 0
     p_count = 0
-    mkdir(f'tweet-{tweet_id}')
+    try:
+        mkdir(f'tweet-{tweet_id}')
+    except:
+        pass
     try:
         for ent in response.includes.media:
             if(ent.type == 'video'):
@@ -61,10 +64,11 @@ for line in list:
     except:
         pass
 
-
-    with open(f'tweet-{tweet_id}/{tweet_id}.json', 'w') as f:
-        json.dump({'tweet_id': tweet_id, "tweet_text": response.data.text, "author_id": response.includes.users[0].id, "author_name": response.includes.users[0].name, "author_handle": f'@{response.includes.users[0].username}'}, f, indent=4)
-
+    try:
+        with open(f'tweet-{tweet_id}/{tweet_id}.json', 'w') as f:
+            json.dump({'tweet_id': tweet_id, "tweet_text": response.data.text, "author_id": response.includes.users[0].id, "author_name": response.includes.users[0].name, "author_handle": f'@{response.includes.users[0].username}'}, f, indent=4)
+    except:
+        pass
     print(f'😎 TWEET SAVE 😎 {tweet_id} SCRAPED')
 #/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/section/div/div/div[1]/div/div/article/div/div/div/div[3]/div[2]/div/div/div/div/div/a/div/div[2]/div/img
 #yld_opts = {'outtmpl': 'a/b.mp4'}
